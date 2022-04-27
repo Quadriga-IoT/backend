@@ -3,14 +3,26 @@ const app = express();
 const http=require('http');
 const path = require('path');
 const router = require('./routes/admin')
-const bodyParser=require('body-parser');
 require('./config/DB_Connection');
-require('./controllers/mqttController');
 
 const AdminRoutes = require('./routes/admin');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
+// const Tractor = require('./models/tractor')
+
+
+//         const tractor = Tractor.create({
+//             battery0: 52,
+//             battery1: 20,
+//             location: "vhv",
+//             activeTask:"req.body.activeTask",
+//             WorkingTime:54,
+//             Speed: 32
+//         }, (err, tractor) => {
+//             if(err) console.log(err);
+//             else {
+//                 console.log(tractor);
+//             }
+//         })
 
 
 app.listen(80,()=>{
