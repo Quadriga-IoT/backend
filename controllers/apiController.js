@@ -1,6 +1,6 @@
 const Tractor = require('../models/tractor')
 
-const deneme= (req,res) => {
+const tractor_DB= (req,res) => {
     // res.send('<h1>Hello</h1>');
     if (req.err) {
         res.json(err);
@@ -22,5 +22,5 @@ const deneme= (req,res) => {
 }
 
 module.exports = {
-    deneme
+    tractor_DB
 }

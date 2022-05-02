@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const denemecontroller=require('../controllers/adminController');
+const apicontroller=require('../controllers/apiController');
 
-router.post('/verikaydetme',denemecontroller.deneme);
+router.post('/verikaydetme',apicontroller.tractor_DB);
 module.exports=router;
