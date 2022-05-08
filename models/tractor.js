@@ -13,12 +13,18 @@ const tractorSchema =mongoose.Schema({
     activeTask:{
         type: String
     },
-    WorkingTime:{
+    workingTime:{
         type: Number
     },
-    Speed:{
+    speed:{
         type: Number
     },
+    date:{
+        type: Date,
+        default: _ => {
+            return Date.now()
+        }
+    }
 }, {collection: 'tractors'})
 
 module.exports = mongoose.model('tractor', tractorSchema);
