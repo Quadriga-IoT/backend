@@ -33,9 +33,18 @@
 // })
 
 // module.exports = client.on;
+//örnek mqtt verisi
+// "battery0": 9,
+// "battery1": 9,
+// "location": "data.location",
+// "activeTask": "data.activeTask"
+// "workingTime": 70,
+// "speed": 50,
+// "date": ""
 
+const env = require('../env')
 const mqtt = require('mqtt');
-const client = mqtt.connect('mqtt://127.0.0.1')
+const client = mqtt.connect('mqtt://164.92.130.208:8883', {username:env.MQTT_USERNAME, password:env.MQTT_PASSWORD}) // ipye bakalım
 const topic = 'tractor';
 const Tractor = require('../models/tractor')
 
@@ -73,6 +82,6 @@ client.on('message', function (topic, message, packet) {
   // message is Buffer
   const msg = JSON.parse(message);
   msg.date = Date.now();
-  tractor(msg); // her gelen yüz veride bir kaydet
+  tractor(msg); // her gelen yüz veride bir kaydet ve ikinci publish edilen veriyi kaydetmiyor => oyeustan kopya çekebilirsin
   client.end();
 })
