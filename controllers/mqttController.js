@@ -68,12 +68,14 @@ const tractor = (data) => {
     console.log("Database'e ekleme yapılırken hata oluştu.");
   })
 }
-let count = 0;
 
+let count = 0;
 client.on('message', function (topic, message, packet) {
   // message is Buffer
   const msg = JSON.parse(message);
   msg.date = Date.now();
+      
+
   tractor(msg); // her gelen yüz veride bir kaydet
   client.end();
 })
