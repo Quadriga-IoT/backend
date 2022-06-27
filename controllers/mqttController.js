@@ -3,7 +3,7 @@
 
 // const host = 'localhost'
 // const port = '80'
-// const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 // const connectUrl = `mqtt://${host}:${port}`
 // const client = mqtt.connect(connectUrl, {
 //   clientId,
@@ -35,7 +35,8 @@
 // module.exports = client.on;
 
 const mqtt = require('mqtt');
-const client = mqtt.connect('mqtt://127.0.0.1')
+// const client = mqtt.connect('mqtt://127.0.0.1:1883') // id 
+const client = mqtt.connect('mqtt://164.92.130.208:1883') //ip
 const topic = 'tractor';
 const Tractor = require('../models/tractor')
 
@@ -46,7 +47,7 @@ client.on('connect', function () {
       console.log("An error occured: " + err);
     }
   })
-})
+}, clientId)
 client.on("error", (err) => {
   console.log("Mqtt connect unseccesfull: " + err);
 })
