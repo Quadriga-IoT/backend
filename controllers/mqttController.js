@@ -82,6 +82,6 @@ client.on('message', function (topic, message, packet) {
   // message is Buffer
   const msg = JSON.parse(message);
   msg.date = Date.now();
-  tractor(msg); // her gelen yüz veride bir kaydet => oyeustan kopya çekebilirsin
- 
+  tractor(msg); // her gelen yüz veride bir kaydet ve ikinci publish edilen veriyi kaydetmiyor => oyeustan kopya çekebilirsin
+  client.end();
 })
