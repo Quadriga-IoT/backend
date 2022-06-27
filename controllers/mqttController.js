@@ -74,12 +74,6 @@ client.on('message', function (topic, message, packet) {
   // message is Buffer
   const msg = JSON.parse(message);
   msg.date = Date.now();
-<<<<<<< HEAD
   tractor(msg); // her gelen yüz veride bir kaydet ve ikinci publish edilen veriyi kaydetmiyor => oyeustan kopya çekebilirsin
-=======
-      
-
-  tractor(msg); // her gelen yüz veride bir kaydet
->>>>>>> bd68f0deb87a346e9ae25db87e2d2a1c8ded2bb7
   client.end();
 })
