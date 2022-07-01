@@ -3,7 +3,7 @@
 
 // const host = 'localhost'
 // const port = '80'
-const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+// const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 // const connectUrl = `mqtt://${host}:${port}`
 // const client = mqtt.connect(connectUrl, {
 //   clientId,
@@ -33,10 +33,18 @@ const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 // })
 
 // module.exports = client.on;
+//örnek mqtt verisi
+// "battery0": 9,
+// "battery1": 9,
+// "location": "data.location",
+// "activeTask": "data.activeTask"
+// "workingTime": 70,
+// "speed": 50,
+// "date": ""
 
+const env = require('../env')
 const mqtt = require('mqtt');
-// const client = mqtt.connect('mqtt://127.0.0.1:1883') // id 
-const client = mqtt.connect('mqtt://164.92.130.208:1883') //ip
+const client = mqtt.connect('mqtt://164.92.130.208:8883', {username:env.MQTT_USERNAME, password:env.MQTT_PASSWORD}) // ipye bakalım
 const topic = 'tractor';
 const Tractor = require('../models/tractor')
 
@@ -47,7 +55,7 @@ client.on('connect', function () {
       console.log("An error occured: " + err);
     }
   })
-}, clientId)
+})
 client.on("error", (err) => {
   console.log("Mqtt connect unseccesfull: " + err);
 })
@@ -68,12 +76,12 @@ const tractor = (data) => {
     console.log("Database'e ekleme yapılırken hata oluştu.");
   })
 }
-
 let count = 0;
+
 client.on('message', function (topic, message, packet) {
   // message is Buffer
   const msg = JSON.parse(message);
   msg.date = Date.now();
-  tractor(msg); // her gelen yüz veride bir kaydet ve ikinci publish edilen veriyi kaydetmiyor => oyeustan kopya çekebilirsin
-  client.end();
+  tractor(msg); // her gelen yüz veride bir kaydet => oyeustan kopya çekebilirsin
+ 
 })
