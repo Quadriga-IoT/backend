@@ -1,10 +1,10 @@
 // const socketio = require('socket.io');
 // // const socket =io('http://164.92.130.208:8883');
       
-// module.exports.listen=function(app){
-//     io = socketio(app,{
+// module.exports.listen=function(server){
+//     io = socketio(server,{
 //         cors: {
-//             origin :"http://164.92.130.208:8883",
+//             origin :"*",
 //             methods :["GET", "POST"]
 //         }
 //     });
