@@ -47,6 +47,8 @@ const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://164.92.130.208:8883', {username:env.MQTT_USERNAME, password:env.MQTT_PASSWORD}) // ipye bakalım
 const topic = 'tractor';
 const Tractor = require('../models/tractor')
+const io = require('../app').io
+
 
 client.on('connect', function () {
   console.log("mqtt connection succesfull: " + client.connected);
@@ -77,11 +79,23 @@ const tractor = (data) => {
   })
 }
 let count = 0;
+let msg = "";
 
-client.on('message', function (topic, message, packet) {
+io.on('connection', (socket) => {
+  console.log("socketio a user connected");
+  socket.on('publish', function (data) {
+    console.log('Publishing to '+data.topic);
+    client.publish(data.topic,data.payload);
+  });
+});
+client.on('message', function (topic, payload, packet) {
   // message is Buffer
-  const msg = JSON.parse(message);
+  msg = JSON.parse(payload);
   msg.date = Date.now();
   tractor(msg); // her gelen yüz veride bir kaydet => oyeustan kopya çekebilirsin
- 
+  io.sockets.emit('mqtt',
+  {
+    'topic':String(topic),
+    'payload':JSON.stringify(msg)
+  });
 })

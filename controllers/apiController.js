@@ -4,7 +4,7 @@ const client = require('./mqttController')
 
 const getTractors = async (req, res) => {
     try {
-        const result = await Tractor.find({});
+        const result = await Tractor.find({}).select({ _id: 0, __v: 0 });
         res.status(200).json({
             "success": true,
             "code": 200,
@@ -54,7 +54,12 @@ const getTractors = async (req, res) => {
 //     }
 // }
 
+const socketdeneme = (req, res) => {
+    res.render('socketio')
+}
+
 module.exports = {
     //createTractor,
-    getTractors
+    getTractors,
+    socketdeneme
 }

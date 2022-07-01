@@ -4,7 +4,8 @@ const http=require('http');
 const path = require('path');
 const bodyParser= require('body-parser');
 const cors = require('cors');
-const io= require('./controllers/socketiocontroller');
+var server = require('http').Server(app)
+module.exports.io = require('socket.io')(server);
 
 require('./config/DB_Connection');
 require('./controllers/mqttController');
@@ -16,7 +17,11 @@ const router = require('./routes/router');
 app.use(cors());
 
 
-app.listen(3000,()=>{
+
+app.set('view engine', 'ejs'); //
+app.set('views', __dirname + '/views'); //
+
+server.listen(3000,()=>{
     console.log("Listening on port 3000");
 })
 
