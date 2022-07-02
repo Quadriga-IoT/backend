@@ -37,7 +37,7 @@
 // "battery0": 9,
 // "battery1": 9,
 // "location": "data.location",
-// "activeTask": "data.activeTask"
+// "activeTask": "data.activeTask",
 // "workingTime": 70,
 // "speed": 50,
 // "date": ""
@@ -84,7 +84,7 @@ let msg = "";
 io.on('connection', (socket) => {
   console.log("socketio a user connected");
   socket.on('publish', function (data) {
-    console.log('Publishing to '+data.topic);
+    console.log('Publishing to '+ data.topic);
     client.publish(data.topic,data.payload);
   });
 });
@@ -92,7 +92,7 @@ client.on('message', function (topic, payload, packet) {
   // message is Buffer
   msg = JSON.parse(payload);
   msg.date = Date.now();
-  tractor(msg); // her gelen yüz veride bir kaydet => oyeustan kopya çekebilirsin
+  tractor(msg); // her gelen yüz veride bir kaydet
   io.sockets.emit('mqtt',
   {
     'topic':String(topic),
