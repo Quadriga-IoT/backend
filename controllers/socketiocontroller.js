@@ -28,7 +28,7 @@
 
 
 const socketIO = require('socket.io');
-const io = socketIO('http://164.92.130.208:8883');
+const io = socketIO('http://164.92.130.208');
 
 io.on('connection', (socket) => {
   socket.send('Welcome')
